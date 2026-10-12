@@ -1,0 +1,28 @@
+# External deployment example. Review provider terms/resources before deploying.
+# PUBLIC_URL is requested at Blueprint setup; use the assigned HTTPS site origin.
+services:
+  - type: web
+    name: streamsave
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    autoDeploy: false
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: "10000"
+      - key: SECURE_COOKIES
+        value: "true"
+      - key: PUBLIC_URL
+        sync: false
+      - key: MAX_CONCURRENT_DOWNLOADS
+        value: "1"
+      - key: MAX_FILE_MB
+        value: "150"
+      - key: MAX_DURATION_SECONDS
+        value: "1800"
+      - key: MAX_STORAGE_MB
+        value: "512"

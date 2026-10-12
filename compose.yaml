@@ -1,0 +1,22 @@
+services:
+  streamsave:
+    build: .
+    ports:
+      - "127.0.0.1:8000:8000"
+    init: true
+    restart: unless-stopped
+    environment:
+      PORT: "8000"
+      HOST: "0.0.0.0"
+      SECURE_COOKIES: "false"
+      MAX_CONCURRENT_DOWNLOADS: "1"
+      MAX_DURATION_SECONDS: "1800"
+      MAX_FILE_MB: "150"
+      MAX_STORAGE_MB: "512"
+      MIN_FREE_MB: "64"
+    volumes:
+      - streamsave-downloads:/app/data/downloads
+    stop_grace_period: 25s
+
+volumes:
+  streamsave-downloads:
